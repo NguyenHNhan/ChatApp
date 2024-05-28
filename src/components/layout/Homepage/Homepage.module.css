@@ -1,0 +1,36 @@
+.masterLayout {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+}
+
+.sidebarLeft {
+    width: 25%;
+    border-left: 1px solid rgb(231, 230, 230);
+    border-right: 1px solid rgb(231, 230, 230);
+    padding: 0 0.5rem 0 0.5rem;
+}
+
+.sidebarRight {
+    width: 75%;
+
+    background: linear-gradient(135deg, #dafcd6 0%, #5ca853 50%, #dafcd6 100%);
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 
+@media (max-width: 414px) {
+    .masterLayout {
+    }
+  
+    .sidebarLeft {
+      width: 100%;
+      border: none;
+    }
+  
+    .sidebarRight {
+        display: none;
+    }
+  } */
