@@ -1,12 +1,11 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { FaSmile, FaArrowUp } from "react-icons/fa";
 import Cookies from 'js-cookie';
 import io from 'socket.io-client';
+import Responsive from "../utility/Responsive";
 const socket = io('http://localhost:3001');
 const MessageTextBox = () => {
     const [content, setContent] = useState('')
-
-    console.log('okoko')
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
@@ -43,9 +42,8 @@ const MessageTextBox = () => {
             });
 
     }
-
     return (
-        <div className="messagetextbox">
+        <div className={Responsive().isResponsive ? `messagetextboxRes` : `messagetextbox` }>
             <FaSmile size={30} color="grey" />
             <input className="inputcontent" placeholder="Nhập văn bản" value={content} onChange={(e) => setContent(e.target.value)} onKeyPress={handleKeyPress}></input>
             <button className="btnsent" onClick={handleClickSentData}><FaArrowUp size={15} /></button>

@@ -10,6 +10,7 @@ import CrtCVS from "../createcvs";
 import Contact from "../contacts";
 
 import styles from './Homepage.module.css';
+import Responsive from "../../utility/Responsive";
 
 const HomePage = () => {
     const [selectedUser, setSelectedUser] = useState(null);
@@ -18,11 +19,9 @@ const HomePage = () => {
     const [list_cvs, setList_cvs] = useState([])
     const [list_contact, setList_contact] = useState([])
     const [isShow, setIsShow] = useState(false);
-
     const handleUserSelection = (username) => {
         setSelectedUser(username);
     }
-
     const searchUser = (event) => {
         const searchTerm = event.target.value;
         if (searchTerm.trim() === '') {
@@ -119,9 +118,11 @@ const HomePage = () => {
     const closeProfile = () => {
         setIsShow(prev => !prev);
     }
+    const responsiveData = Responsive();
+    const { isResponsive, isSelect } = responsiveData;
     return (
         <div className={styles.masterLayout}>
-            <div className={styles.sidebarLeft}>
+            <div className={isResponsive ? (isSelect ? 'd-none' : styles.sidebarLeftRes) : styles.sidebarLeft}>
                 {isShow ? (
                     <Profile closeProfile={closeProfile} />
                 ) : (
@@ -148,7 +149,7 @@ const HomePage = () => {
                         )}
                         <div className="chatlist">
                             {list_cvs.map((cvs, index) => (
-                                <MessageBlock key={index} onUserSelect={handleUserSelection} user_id={cvs._id} user_fullname={cvs.users_fullname} subtitle={cvs.endmess} time={cvs.time} />
+                                <MessageBlock key={index} onUserSelect={handleUserSelection} user_id={cvs._id} user_fullname={cvs.users_fullname} subtitle={cvs.endmess} time={cvs.time} avatar={cvs.avatar}/>
                             ))}
                             <p> Contact </p>
                             {list_contact.map((contact, index) => (

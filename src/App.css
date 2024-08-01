@@ -144,9 +144,19 @@
     justify-content: space-around;
     position: relative;
     z-index: 9999;
-
 }
 
+.messagetextboxRes {
+    background-color: rgb(255, 255, 255);
+    height: 50px;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    z-index: 9999;
+}
 .inputcontent {
     width: 85%;
     border: none;

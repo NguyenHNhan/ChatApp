@@ -11,8 +11,27 @@ const Profile = ({ closeProfile }) => {
     const handleClick = () => {
         setEdit(!edit)
     }
-    const onSubmit = data => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        try {
+            const formData = new FormData();
+            formData.append('users_fullname', data.users_fullname);
+            formData.append('users_phone', data.users_phone);
+            formData.append('users_email', data.users_email);
+            formData.append('avatar', data.avatar[0]);
+
+            console.log(formData)
+            const response = await fetch('http://localhost:3001/api/user/uploadavatar', {
+                method: 'POST',
+                body: formData,
+            });
+            if (!response.ok) {
+                throw new Error('Failed to upload avatar');
+            }
+            const responseData = await response.json();
+            console.log('Avatar uploaded successfully:', responseData);
+        } catch (error) {
+            console.error('Error uploading avatar:', error);
+        }
     };
 
     useEffect(() => {
@@ -61,8 +80,7 @@ const Profile = ({ closeProfile }) => {
             {!edit ? (
                 <>
                     <div className="nav-profile" > <FaArrowLeft onClick={closeProfile} /> <h2>Profile</h2> <FaPen onClick={handleClick} /> </div>
-
-                    <img className="avt-profile" src="https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/329989451_1210530066501569_4826733360235244863_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=sS12dBUYh7YQ7kNvgEUY7r-&_nc_ht=scontent.fsgn5-9.fna&oh=00_AYDhVEqiexuk7WYcsfs557TOQPVC2STfVfvvYd4nTnksdQ&oe=664A629B"></img>
+                    <img className="avt-profile" src="http://localhost:3001/api/images/avatars/default.jpg"></img>
                     <h4>{data.users_fullname}</h4>
                     <h5>@huunhan</h5>
                     <div className="d-flex flex-column w-100 border-top">
@@ -73,10 +91,12 @@ const Profile = ({ closeProfile }) => {
             ) : (
                 <>
                     <div className="nav-profile" > <FaArrowLeft onClick={handleClick} /> <h2>Profile</h2> <div></div> </div>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <img className="avt-profile" src={avatar ? avatar : "https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/329989451_1210530066501569_4826733360235244863_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=sS12dBUYh7YQ7kNvgEUY7r-&_nc_ht=scontent.fsgn5-9.fna&oh=00_AYDhVEqiexuk7WYcsfs557TOQPVC2STfVfvvYd4nTnksdQ&oe=664A629B"}></img>
-                        <input type="file" onChange={handleChangeAvt} />
+                    <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data" >
+                        <img className="avt-profile" src={avatar ? "http://localhost:3001/api/images/avatars/" : 'http://localhost:3001/api/images/avatars/default.jpg'}></img>
                         <div className="d-flex flex-column w-100 border-top">
+                            <input type="file" onChange={handleChangeAvt}
+                                {...register('avatar', { required: true })}
+                            />
                             <input className="input" type="text" placeholder="Họ và Tên"
                                 defaultValue={data.users_fullname}
                                 {...register('users_fullname', { required: true })}

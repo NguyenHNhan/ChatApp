@@ -1,7 +1,9 @@
 import { memo, useEffect, useState } from "react";
-import { FaSearch, FaEllipsisV } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { FaSearch, FaEllipsisV, FaArrowLeft } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
 import { openDB } from 'idb';
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
+import Responsive from "../utility/Responsive";
 const HeaderMessage = () => {
 
     const location = useLocation();
@@ -18,6 +20,7 @@ const HeaderMessage = () => {
             const store = tx.objectStore('conversations');
 
             const data = await store.get(cvs_id);
+            console.log(data)
             if (!data) {
                 return;
             }
@@ -28,8 +31,12 @@ const HeaderMessage = () => {
     }, [location]);
     return (
         <div className="headermessage">
+            {
+                Responsive().isResponsive ? (<Link to={'/'}> <FaArrowLeft size={30} className="mx-2" />  </Link>) : null
+            }
+
             <div className="headermessage-left">
-                <div className="avt"></div>
+                {/* <img className="avt" src={avatar ? "http://localhost:3001/api/images/avatars/" : 'http://localhost:3001/api/images/avatars/default.jpg'} /> */}
             </div>
             <div className="headermessage-right">
                 <div className="headermessage-infor">

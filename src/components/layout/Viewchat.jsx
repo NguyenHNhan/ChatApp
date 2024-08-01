@@ -7,12 +7,15 @@ import { io } from "socket.io-client";
 import Cookies from 'js-cookie';
 
 import styles from "./Homepage/Homepage.module.css";
+import Responsive from "../utility/Responsive";
+
 const Viewchat = ({ fullname }) => {
 
     const location = useLocation();
+
     const [messageList, setMessageList] = useState([]);
     const cvs_id = window.location.hash.substring(1);
-   
+
     useEffect(() => {
 
         if (!cvs_id) return;
@@ -51,8 +54,10 @@ const Viewchat = ({ fullname }) => {
             socket.disconnect();
         };
     }, [cvs_id, location]);
+    const responsiveData = Responsive();
+    const { isResponsive, isSelect } = responsiveData;
     return (
-        <div className={styles.sidebarRight}>
+        <div className={isResponsive ? (isSelect ? styles.sidebarRightRes : 'd-none') : styles.sidebarRight}>
             {cvs_id && (
                 <>
                     <div className="header-message">

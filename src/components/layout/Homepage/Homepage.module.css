@@ -11,17 +11,27 @@
     padding: 0 0.5rem 0 0.5rem;
 }
 
+.sidebarLeftRes {
+    width: 100%;
+    border: none;
+  }
+
 .sidebarRight {
     width: 75%;
-
     background: linear-gradient(135deg, #dafcd6 0%, #5ca853 50%, #dafcd6 100%);
     justify-content: space-between;
     display: flex;
     flex-direction: column;
 }
+.sidebarRightRes {
+    width: 100%;
+    background: linear-gradient(135deg, #dafcd6 0%, #5ca853 50%, #dafcd6 100%);
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+  }
 
-/* 
-@media (max-width: 414px) {
+/* @media (max-width: 414px) {
     .masterLayout {
     }
   

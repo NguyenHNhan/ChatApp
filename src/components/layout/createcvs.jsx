@@ -1,24 +1,6 @@
 import Cookies from 'js-cookie';
-import { Link } from "react-router-dom";
 
 const CrtCVS = ({ user_fullname, user_id }) => {
-
-    // const createconversation = (user_id) => {
-    //     fetch("http://localhost:3001/api/conversation/createconversation", {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({ token: Cookies.get('token'), id: user_id })
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log("trave", data);
-    //         })
-    //         .catch(error => {
-    //             console.error('Error:', error);
-    //         });
-    // }
 
     const addContact = (user_id) => {
         fetch("http://localhost:3001/api/contacts/add", {
@@ -39,7 +21,6 @@ const CrtCVS = ({ user_fullname, user_id }) => {
 
     }
     return (
-        // <Link to={`/#${user_id}`} >
         <div className={`messageblock`}  >
             <div className="massageblock-left">
                 <div className="avt"></div>
@@ -51,8 +32,6 @@ const CrtCVS = ({ user_fullname, user_id }) => {
                 </div>
             </div>
         </div>
-        // </Link >
-
     )
 }
 
